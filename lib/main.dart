@@ -1,5 +1,5 @@
+
 import 'package:flutter/material.dart';
-import 'dart:developer';
 
 void main() {
   runApp(const MyApp());
@@ -27,6 +27,24 @@ class _CalculatorHomePageState extends State<CalculatorHomePage> {
   TextEditingController number1 = TextEditingController();
   TextEditingController number2 = TextEditingController();
   double result = 0;
+  double mathoperation(String operation){
+ double num1 = double.parse(number1.text);
+ double num2 = double.parse(number2.text);
+if (operation == "add") {
+  return num1 + num2;
+} else if (operation == "sub") {
+   return num1 - num2;
+} else if (operation == "mul") {
+  return num1 * num2;
+} else if (operation == "div") {
+  return num1 / num2;
+} else {
+  return 0;
+}
+}
+
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,66 +82,54 @@ class _CalculatorHomePageState extends State<CalculatorHomePage> {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Column(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                        onPressed: () {
-                          int num1 = int.parse(number1.text);
-                          int num2 = int.parse(number2.text);
-                          result = num1.toDouble() + num2.toDouble();
-
-                          setState(() {});
-                          log(result.toString());
-                        },
-                        child: const Text("Sum")),
-                    const SizedBox(width: 10),
-                    const SizedBox(height: 10),
-                    ElevatedButton(
-                        onPressed: () {
-                          double num1 = double.parse(number1.text);
-                          double num2 = double.parse(number2.text);
-                          result = num1 / num2;
-                          setState(() {});
-                        },
-                        child: const Text("Div"))
+                ElevatedButton(onPressed: (){
+                      result = mathoperation("div");
+                      setState(() {
+                        
+                      });
+                    }, child:const Text("div")),
+                      const SizedBox(width: 10),
+                    ElevatedButton(onPressed: (){
+                      result = mathoperation("add");
+                       setState(() {
+                        
+                      });
+                    }, child:const Text("Add")),
+                   
                   ],
+                ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      ElevatedButton(
-                          onPressed: () {
-                            int num1 = int.parse(number1.text);
-                            int num2 = int.parse(number2.text);
-                            result = num1.toDouble() * num2.toDouble();
-
-                            setState(() {});
-                          },
-                          child: const Text("Mul")),
+                      ElevatedButton(onPressed: () {
+                    result = mathoperation("mul");
+                     setState(() {
+                        
+                      });
+                   },    child: const Text("Mul")),
                       const SizedBox(width: 10),
-                      ElevatedButton(
-                          onPressed: () {
-                            int num1 = int.parse(number1.text);
-                            int num2 = int.parse(number2.text);
-                            result = num1.toDouble() - num2.toDouble();
-
-                            setState(() {});
-                          },
-                          child: const Text("Sub"))
+                      ElevatedButton(onPressed: () {
+                            result = mathoperation("sub");
+                             setState(() {
+                        
+                      });
+                    }, child:const Text("sub")),
+                   
                     ],
-                  ),
-                )
+                        
+                  
+                    ),
+                  )
+                
               ],
             ),
-          )
-        ],
-      ),
-    );
+          );
+          
   }
 }
